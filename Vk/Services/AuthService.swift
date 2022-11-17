@@ -17,6 +17,7 @@ protocol AuthServiceDelegate: AnyObject {
 class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     
     var token: String? {
+        print("token \(VKSdk.accessToken().accessToken)")
         return VKSdk.accessToken().accessToken
     }
     private let appId = "51478899"

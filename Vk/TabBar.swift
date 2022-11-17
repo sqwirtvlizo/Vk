@@ -16,9 +16,15 @@ class TabBar: UITabBarController {
         tabBar.layer.shadowColor = UIColor.black.cgColor
         tabBar.layer.shadowRadius = 5
         tabBar.layer.shadowOffset = .zero
+        let appearance = UITabBarAppearance()
+               appearance.configureWithOpaqueBackground()
+               appearance.backgroundColor = .white
+               tabBar.standardAppearance = appearance
+               tabBar.scrollEdgeAppearance = tabBar.standardAppearance
+//        tabBar.scrollEdgeAppearance!.shadowColor = nil
         tabBar.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.05)
         viewControllers = [
-            generateViewController(rootViewController: HomeViewController(), image: UIImage(named: "home")!, title: "Главная"),
+            generateViewController(rootViewController: NewsfeedViewController(), image: UIImage(named: "home")!, title: "Главная"),
             generateViewController(rootViewController: ServicesViewController(), image: UIImage(named: "services")!, title: "Сервисы"),
             generateViewController(rootViewController: MessageViewController(), image: UIImage(named: "messages")!, title: "Сообщения"),
             generateViewController(rootViewController: ClipsViewController(), image: UIImage(named: "clips")!, title: "Клипы"),
@@ -30,9 +36,9 @@ class TabBar: UITabBarController {
         let navigationVC = UINavigationController(rootViewController: rootViewController)
         navigationVC.tabBarItem.image = image
         navigationVC.tabBarItem.title = title
-        rootViewController.navigationItem.title = title
+       // rootViewController.navigationItem.title = title
         navigationVC.navigationBar.prefersLargeTitles = true
-        
+        navigationVC.navigationItem.largeTitleDisplayMode = .always
         return navigationVC
     }
 

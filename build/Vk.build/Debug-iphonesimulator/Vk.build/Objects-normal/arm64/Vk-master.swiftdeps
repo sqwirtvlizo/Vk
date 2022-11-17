@@ -1,0 +1,19 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "49a5a8e51392a9e0e5532f699f0b58ffe248827a426187593718ac66316ea621"
+build_start_time: [1668713431, 446686983]
+build_end_time: [1668713431, 573873996]
+inputs:
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/AppDelegate.swift": !private [1668710374, 303997039]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/AuthViewController.swift": !private [1668710374, 307145595]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/ClipsViewController/ClipsViewController.swift": !private [1668710374, 307579994]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/HomeViewController/HomeViewController.swift": !private [1668710374, 307843685]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/MessageViewController/MessageViewController.swift": !private [1668710374, 308182954]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/ProfileViewController/ProfileViewController.swift": !private [1668710374, 308440446]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/SceneDelegate.swift": !private [1668710374, 308633804]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/Services/API.swift": !private [1668710374, 308780670]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/Services/AuthService.swift": !private [1668710374, 308875083]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/Services/FeedResponse.swift": !private [1668710374, 308968067]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/Services/NetworkDataFetcher.swift": !private [1668710374, 309055566]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/Services/NetworkService.swift": !private [1668710374, 309148788]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/ServicesViewController/ServicesViewController.swift": !private [1668710374, 309284210]
+  "/Users/evgenijkononenko/Documents/testProjects/Vk/Vk/TabBar.swift": !private [1668710374, 309451818]

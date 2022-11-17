@@ -1,0 +1,9 @@
+Target dependency graph (4 targets)
+VK-ios-sdk-VKSdkResources in Pods, no dependencies
+VK-ios-sdk in Pods, depends on:
+VK-ios-sdk-VKSdkResources in Pods (explicit)
+Pods-Vk in Pods, depends on:
+VK-ios-sdk in Pods (explicit)
+Vk in Vk, depends on:
+Pods-Vk in Pods (implicit dependency via file 'Pods_Vk.framework' in build phase 'Link Binary')
+VK-ios-sdk in Pods (implicit dependency via options '-framework VK_ios_sdk' in build setting 'OTHER_LDFLAGS')
