@@ -9,19 +9,15 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    private let networkService: Networking = NetworkService()
+    private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        let params = ["filters": "post, photo"]
-        networkService.request(path: API.newsFeed, params: params) { (data, error) in
-            if let error = error {
-                print("error")
+        fetcher.getFeed { feedResponse in
+            guard let feedResponse = feedResponse else { return }
+            feedResponse.items.map { feedItem in
+                print(feedItem.date)
             }
-            guard let data = data else { return }
-            let json = try? JSONSerialization.jsonObject(with: data)
-            print(json)
         }
     }
 
