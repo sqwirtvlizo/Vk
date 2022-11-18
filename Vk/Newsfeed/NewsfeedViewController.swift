@@ -16,6 +16,7 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
     let toolbar = ToolBar()
     var interactor: NewsfeedBusinessLogic?
     var router: (NSObjectProtocol & NewsfeedRoutingLogic)?
+    private var feedViewModel = FeedViewModel(cells: [])
     private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
     // MARK: Object lifecycle
     
@@ -57,12 +58,11 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
         fetcher.getFeed { feedResponse in
             guard let feedResponse = feedResponse else { return }
             feedResponse.items.map { feedItem in
-                print(feedItem.postId)
+                print(feedItem)
             }
         }
-        
         setToolbar()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: "NewsfeedTableViewCell", bundle: nil), forCellReuseIdentifier: NewsfeedTableViewCell.reuseId)
         
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "loop"),
                                                  style: .done,
@@ -77,19 +77,10 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
         
         let rightBarButtonItems: [UIBarButtonItem] = [rightBarButtonItem1, rightBarButtonItem]
         navigationItem.rightBarButtonItems = rightBarButtonItems
-        
-//        let segment: UISegmentedControl = UISegmentedControl(items: ["First", "Second"])
-//           segment.sizeToFit()
-//           segment.selectedSegmentTintColor = UIColor.red
-//           segment.selectedSegmentIndex = 0
-//           segment.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: "SFProDisplay-Bold", size: 23)], for: .normal)
-////        segment.topAnchor.constraint(equalTo: toolbar.stackView.topAnchor, constant: 0).isActive = true
-//        segment.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-//        segment.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-//        segment.bottomAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 0).isActive = true
-//        self.view.addSubview(segment)
+        self.navigationController?.hidesBarsOnSwipe = true
+        interactor?.makeRequest(request: .getNewsfeed)
     
-//        self.navigationController?.hidesBarsOnSwipe = true
+      
         
     }
     
@@ -112,43 +103,53 @@ class NewsfeedViewController: UIViewController, NewsfeedDisplayLogic {
     
     func displayData(viewModel: Newsfeed.Model.ViewModel.ViewModelData) {
         switch viewModel {
-        case .some:
-            print(". some vc")
-        case .displayNewsfeed:
-            print()
+        case .displayNewsfeed(let feedViewModel):
+            self.feedViewModel = feedViewModel
+            tableView.reloadData()
         }
     }
-    //    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    //
-    //
-    //       }
 }
 
 extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        50
+        feedViewModel.cells.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = String(indexPath.row)
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsfeedTableViewCell.reuseId, for: indexPath) as! NewsfeedTableViewCell
+        cell.layer.borderWidth = CGFloat(3)
+        cell.layer.borderColor = tableView.backgroundColor?.cgColor
+        
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+//        cell.imageCellView.layer.cornerRadius = cell.imageCellView.fr
+        cell.set(viewModel: cellViewModel)
+        cell.delegate = self
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        feedViewModel.cells[indexPath.row].sizes.totalHieght
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         self.velocity = velocity
-        showAndHideToolBar(with: velocity)
+      //  showAndHideToolBar(with: velocity)
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        interactor?.makeRequest(request: .getFeed)
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        feedViewModel.cells[indexPath.row].sizes.totalHieght
     }
     
     
+    
+    
     private func showAndHideToolBar(with velocity: CGPoint) {
-        if velocity.y > 0{
-            //Code will work without the animation block.I am using animation block incase if you want to set any delay to it.
+        if velocity.y > 0 {
             UIView.animate(withDuration: 0.45, delay: 0, options: .curveEaseIn, animations: { [self] in
                 toolbar.titleLabel.layer.opacity = 0
 //                navigationController?.toolbar.layer.opacity = 0
@@ -168,5 +169,12 @@ extension NewsfeedViewController: UITableViewDelegate, UITableViewDataSource, UI
             }, completion: nil)
         }
     }
-    //    scrollview
+}
+
+extension NewsfeedViewController: NewsfeedCellDelegate {
+    func revealPost(cell: NewsfeedTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        interactor?.makeRequest(request: .revealPostIds(postId: cellViewModel.postId))
+    }
 }

@@ -9,6 +9,7 @@ import Foundation
 
 protocol DataFetcher {
     func getFeed(response: @escaping (FeedResponse?) -> Void)
+    
 }
 
 struct NetworkDataFetcher: DataFetcher {
@@ -24,6 +25,7 @@ struct NetworkDataFetcher: DataFetcher {
                 print(error)
                 response(nil)
             }
+           
             let decoded = self.decodeJson(type: FeedResponseWrapped.self, from: data)
             response(decoded?.response)
         }
@@ -33,6 +35,7 @@ struct NetworkDataFetcher: DataFetcher {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         guard let data = from, let response = try? decoder.decode(type.self, from: data) else { return nil }
+        print(response)
         return response
     }
     
