@@ -66,8 +66,9 @@ class NewsfeedTableViewCell: UITableViewCell {
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Medium", size: 15)
         button.setTitleColor(UIColor(red: 0.161, green: 0.459, blue: 0.8, alpha: 1), for: .normal)
         button.contentHorizontalAlignment = .left
+//        button.
         button.contentVerticalAlignment = .center
-        button.setTitle("Показать полностью...", for: .normal)
+        button.setTitle("Показать полностью...", for: .application)
         return button
     }()
     
