@@ -30,6 +30,8 @@
 		CCEE72182926863C00BBA158 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEE72172926863C00BBA158 /* API.swift */; };
 		CCEE721B2926926C00BBA158 /* FeedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEE721A2926926C00BBA158 /* FeedResponse.swift */; };
 		CCEE721D2926934300BBA158 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEE721C2926934300BBA158 /* NetworkDataFetcher.swift */; };
+		CCEE7220292CE36400BBA158 /* GalleryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEE721F292CE36400BBA158 /* GalleryCollectionView.swift */; };
+		CCEE7222292CE42A00BBA158 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEE7221292CE42A00BBA158 /* GalleryCollectionViewCell.swift */; };
 		D7A58A7F2926D9E8006C2A7F /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A58A7E2926D9E8006C2A7F /* ToolBar.swift */; };
 		D7A58A862926DB92006C2A7F /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7A58A812926DB92006C2A7F /* SFProDisplay-Medium.ttf */; };
 		D7A58A872926DB92006C2A7F /* SFProDisplay-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7A58A822926DB92006C2A7F /* SFProDisplay-Light.ttf */; };
@@ -77,6 +79,8 @@
 		CCEE72172926863C00BBA158 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		CCEE721A2926926C00BBA158 /* FeedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResponse.swift; sourceTree = "<group>"; };
 		CCEE721C2926934300BBA158 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
+		CCEE721F292CE36400BBA158 /* GalleryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionView.swift; sourceTree = "<group>"; };
+		CCEE7221292CE42A00BBA158 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		D7A58A7E2926D9E8006C2A7F /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		D7A58A812926DB92006C2A7F /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		D7A58A822926DB92006C2A7F /* SFProDisplay-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Light.ttf"; sourceTree = "<group>"; };
@@ -235,6 +239,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		CCEE721E292CE35200BBA158 /* GalleryView */ = {
+			isa = PBXGroup;
+			children = (
+				CCEE721F292CE36400BBA158 /* GalleryCollectionView.swift */,
+				CCEE7221292CE42A00BBA158 /* GalleryCollectionViewCell.swift */,
+			);
+			path = GalleryView;
+			sourceTree = "<group>";
+		};
 		D7A58A802926DB92006C2A7F /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +290,7 @@
 		D7D30BD92926CB7E0000A37B /* Newsfeed */ = {
 			isa = PBXGroup;
 			children = (
+				CCEE721E292CE35200BBA158 /* GalleryView */,
 				D7A58A8B2927A15C006C2A7F /* Cell */,
 				D7D30BDA2926CBAD0000A37B /* NewsfeedPresenter.swift */,
 				D7D30BDB2926CBAD0000A37B /* NewsfeedWorker.swift */,
@@ -429,8 +443,10 @@
 				D7D30BE52926CBAD0000A37B /* NewsfeedViewController.swift in Sources */,
 				CCEE72122926833400BBA158 /* ProfileViewController.swift in Sources */,
 				CCEE72032926828000BBA158 /* MessageViewController.swift in Sources */,
+				CCEE7220292CE36400BBA158 /* GalleryCollectionView.swift in Sources */,
 				CCEE71D8292647F700BBA158 /* AppDelegate.swift in Sources */,
 				CCEE71DA292647F700BBA158 /* SceneDelegate.swift in Sources */,
+				CCEE7222292CE42A00BBA158 /* GalleryCollectionViewCell.swift in Sources */,
 				CCEE71ED292652A700BBA158 /* AuthService.swift in Sources */,
 				D7D30BE22926CBAD0000A37B /* NewsfeedWorker.swift in Sources */,
 				CCEE71F629267CEA00BBA158 /* TabBar.swift in Sources */,
@@ -578,6 +594,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P9RVPJP565;
@@ -595,6 +612,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = qwe.Vk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -607,6 +625,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P9RVPJP565;
@@ -624,6 +643,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = qwe.Vk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -1,0 +1,20 @@
+"/Users/evgeha/Documents/BR/Vk/Vk/Services/NetworkService.swift":
+  swift-dependencies: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NetworkService.swiftdeps"
+  object: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NetworkService.o"
+  diagnostics: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NetworkService.dia"
+  dependencies: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NetworkService.d"
+"/Users/evgeha/Documents/BR/Vk/Vk/Newsfeed/Cell/Services/NewsfeedLayoutCalculator.swift":
+  dependencies: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NewsfeedLayoutCalculator.d"
+  diagnostics: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NewsfeedLayoutCalculator.dia"
+  swift-dependencies: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NewsfeedLayoutCalculator.swiftdeps"
+  object: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NewsfeedLayoutCalculator.o"
+"/Users/evgeha/Documents/BR/Vk/Vk/AuthViewController.swift":
+  swift-dependencies: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/AuthViewController.swiftdeps"
+  dependencies: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/AuthViewController.d"
+  diagnostics: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/AuthViewController.dia"
+  object: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/AuthViewController.o"
+"/Users/evgeha/Documents/BR/Vk/Vk/Services/NetworkDataFetcher.swift":
+  swift-dependencies: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NetworkDataFetcher.swiftdeps"
+  object: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NetworkDataFetcher.o"
+  dependencies: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NetworkDataFetcher.d"
+  diagnostics: "/Users/evgeha/Documents/BR/Vk/build/Vk.build/Debug-iphoneos/Vk.build/Objects-normal/arm64/NetworkDataFetcher.dia"

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol FeedCellLayoutCalculatorProtocol {
-    func sizes(postText: String?, attachment: FeedCellPhotoAttachmentViewModel?, isFullSizedPost: Bool) -> FeedCellSizes
+    func sizes(postText: String?, attachments: [FeedCellPhotoAttachmentViewModel], isFullSizedPost: Bool) -> FeedCellSizes
 }
 
 struct Constants {
@@ -33,13 +33,13 @@ struct Sizes: FeedCellSizes {
 }
 
 final class NewsfeedLayoutCalculator: FeedCellLayoutCalculatorProtocol {
-        
+    
     private let screenWidth: CGFloat
     init(screenWidth: CGFloat = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height)) {
         self.screenWidth = screenWidth
     }
     
-    func sizes(postText: String?, attachment: FeedCellPhotoAttachmentViewModel?,isFullSizedPost: Bool) -> FeedCellSizes {
+    func sizes(postText: String?, attachments: [FeedCellPhotoAttachmentViewModel], isFullSizedPost: Bool) -> FeedCellSizes {
         
         var showMoreTextButton = false
         
@@ -76,13 +76,23 @@ final class NewsfeedLayoutCalculator: FeedCellLayoutCalculatorProtocol {
         
         var attachmentFrame = CGRect(origin: CGPoint(x: 5, y: attachmentTop), size: CGSize.zero)
         
-        if let attachment = attachment  {
+        //        if let attachment = attachment  {
+        //            let photoHeight: Float = Float(attachment.height)
+        //            let photoWidth: Float = Float(attachment.width - 4)
+        //            let ratio = CGFloat(photoHeight / photoWidth)
+        //            attachmentFrame.size = CGSize(width: viewWidth - 8, height: viewWidth * ratio)
+        //        }
+        if let attachment = attachments.first {
             let photoHeight: Float = Float(attachment.height)
             let photoWidth: Float = Float(attachment.width - 4)
             let ratio = CGFloat(photoHeight / photoWidth)
-            attachmentFrame.size = CGSize(width: viewWidth - 8, height: viewWidth * ratio)
+            if attachments.count == 1 {
+                attachmentFrame.size = CGSize(width: viewWidth - 8, height: viewWidth * ratio)
+            } else if attachments.count > 1 {
+                print("More then 1 photo")
+                attachmentFrame.size = CGSize(width: viewWidth - 8, height: viewWidth * ratio)
+            }
         }
-        
         
         let bottonViewTop = max(postLabelFrame.maxY, attachmentFrame.maxY)
         let bottomViewFrame = CGRect(origin: CGPoint(x: 0, y: bottonViewTop), size: CGSize(width: viewWidth, height: Constants.bottomViewHeight))

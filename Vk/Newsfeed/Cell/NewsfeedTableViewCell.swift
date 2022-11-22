@@ -16,7 +16,7 @@ protocol FeedCellViewModel {
     var comments: String? { get }
     var shares: String? { get }
     var views: String? { get }
-    var photoAttachment: FeedCellPhotoAttachmentViewModel? { get }
+    var photoAttachments: [FeedCellPhotoAttachmentViewModel] { get }
     var sizes: FeedCellSizes { get }
 } 
 
@@ -66,9 +66,8 @@ class NewsfeedTableViewCell: UITableViewCell {
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Medium", size: 15)
         button.setTitleColor(UIColor(red: 0.161, green: 0.459, blue: 0.8, alpha: 1), for: .normal)
         button.contentHorizontalAlignment = .left
-//        button.
         button.contentVerticalAlignment = .center
-        button.setTitle("Показать полностью...", for: .application)
+        button.setTitle("Показать полностью...", for: .normal)
         return button
     }()
     
@@ -97,7 +96,6 @@ class NewsfeedTableViewCell: UITableViewCell {
         selectionStyle = .none
         self.contentView.addSubview(moreTextButton)
         moreTextButton.addTarget(self, action: #selector(moreTextButtonTouch), for: .touchUpInside)
-        
     }
     
     @objc
@@ -115,14 +113,7 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     func set(viewModel: FeedCellViewModel) {
         imageCellView.set(imageUrl: viewModel.iconUrlString)
-//        if let counts = viewModel.comments, counts == "0" {
-//            widthCommentsView.constant = 0
-//            widthCommentsLabel.constant = 0
-//        } else {
-//            widthCommentsView.constant = 47
-//            widthCommentsLabel.constant = 21
-//        }
-//        imageCellView.backgroundColor = .blue
+        
         nameLabel.text = viewModel.name
         postLabel.text = viewModel.text
         dateLabel.text = viewModel.date
@@ -130,13 +121,19 @@ class NewsfeedTableViewCell: UITableViewCell {
         countSharesLabel.text = viewModel.shares
         countCommentsLabel.text = viewModel.comments
         countViewLabel.text = viewModel.views
-//        postImageCellView.set
         postLabel.frame = viewModel.sizes.postLabelFrame
         postImageCellView.frame = viewModel.sizes.attachmentFrame
         bottomView.frame = viewModel.sizes.bottomView
         moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
-        if let photoAttachment = viewModel.photoAttachment?.photoUrlString {
-            postImageCellView.set(imageUrl: photoAttachment)
+//        if let photoAttachment = viewModel.photoAttachment?.photoUrlString {
+//            postImageCellView.set(imageUrl: photoAttachment)
+//            postImageCellView.isHidden = false
+//        } else {
+//            postImageCellView.isHidden = true
+//        }
+        
+        if let photoAttachment = viewModel.photoAttachments.first, viewModel.photoAttachments.count == 1 {
+            postImageCellView.set(imageUrl: photoAttachment.photoUrlString)
             postImageCellView.isHidden = false
         } else {
             postImageCellView.isHidden = true
