@@ -40,7 +40,7 @@ struct Photo: Decodable {
         return getPropperSize().height
     }
     
-    var width: Int {
+    var weight: Int {
         return getPropperSize().width
     }
     

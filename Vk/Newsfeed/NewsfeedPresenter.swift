@@ -67,14 +67,14 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
         return profileRepresentable!
     }
     
-    private func photoAttachment(feedItem: FeedItem) -> FeedViewModel.FeedCellPhotoAttachment? {
-        guard let photos = feedItem.attachments?.compactMap({ (attachment) in
-            attachment.photo
-        }), let firts = photos.first else {
-            return nil
-        }
-        return FeedViewModel.FeedCellPhotoAttachment(photoUrlString: firts.srcBIG, width: firts.width, height: firts.height)
-    }
+//    private func photoAttachment(feedItem: FeedItem) -> FeedViewModel.FeedCellPhotoAttachment? {
+//        guard let photos = feedItem.attachments?.compactMap({ (attachment) in
+//            attachment.photo
+//        }), let firts = photos.first else {
+//            return nil
+//        }
+//        return FeedViewModel.FeedCellPhotoAttachment(photoUrlString: firts.srcBIG, width: firts.width, height: firts.height)
+//    }
     
     private func photoAttachments(feedItem: FeedItem) -> [FeedViewModel.FeedCellPhotoAttachment] {
         guard let attachments = feedItem.attachments else { return [] }
@@ -82,7 +82,7 @@ class NewsfeedPresenter: NewsfeedPresentationLogic {
         return attachments.compactMap({ (attachment) -> FeedViewModel.FeedCellPhotoAttachment? in
             guard let photo = attachment.photo else { return nil }
             return FeedViewModel.FeedCellPhotoAttachment.init(photoUrlString: photo.srcBIG,
-                                                              width: photo.width,
+                                                              width: photo.weight,
                                                               height: photo.height)
         })
     }

@@ -22,6 +22,7 @@ struct Constants {
     static let minifiedPostLines: CGFloat = 6
     static let moreTextButtonSize = CGSize(width: 170, height: 15)
     static let moreTextButtonInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+    
 }
 
 struct Sizes: FeedCellSizes {
@@ -40,7 +41,6 @@ final class NewsfeedLayoutCalculator: FeedCellLayoutCalculatorProtocol {
     }
     
     func sizes(postText: String?, attachments: [FeedCellPhotoAttachmentViewModel], isFullSizedPost: Bool) -> FeedCellSizes {
-        
         var showMoreTextButton = false
         
         let viewWidth = screenWidth
@@ -89,7 +89,6 @@ final class NewsfeedLayoutCalculator: FeedCellLayoutCalculatorProtocol {
             if attachments.count == 1 {
                 attachmentFrame.size = CGSize(width: viewWidth - 8, height: viewWidth * ratio)
             } else if attachments.count > 1 {
-                print("More then 1 photo")
                 attachmentFrame.size = CGSize(width: viewWidth - 8, height: viewWidth * ratio)
             }
         }

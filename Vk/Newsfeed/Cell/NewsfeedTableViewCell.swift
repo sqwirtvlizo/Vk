@@ -39,14 +39,17 @@ protocol NewsfeedCellDelegate: AnyObject {
 }
 
 class NewsfeedTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var sharesView: UIView!
     
     @IBOutlet weak var imageCellView: WebImageView!
     
     @IBOutlet weak var postImageCellView: WebImageView!
     
-    @IBOutlet weak var widthCommentsView: NSLayoutConstraint!
+    @IBOutlet weak var trailingLikeImageConstraintToLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var trilingShareImageConstraintToLabel: NSLayoutConstraint!
+    @IBOutlet weak var trailingCommentImageConstraintToLabel: NSLayoutConstraint!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var postLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -62,7 +65,7 @@ class NewsfeedTableViewCell: UITableViewCell {
     weak var delegate: NewsfeedCellDelegate?
     
     let moreTextButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Medium", size: 15)
         button.setTitleColor(UIColor(red: 0.161, green: 0.459, blue: 0.8, alpha: 1), for: .normal)
         button.contentHorizontalAlignment = .left
@@ -71,6 +74,7 @@ class NewsfeedTableViewCell: UITableViewCell {
         return button
     }()
     
+    var galleryCollectionView = GalleryCollectionView()
     
     override func prepareForReuse() {
         imageCellView.set(imageUrl: nil)
@@ -94,6 +98,7 @@ class NewsfeedTableViewCell: UITableViewCell {
         sharesView.layer.cornerRadius = 12
         imageCellView.layer.cornerRadius = imageCellView.frame.width / 2
         selectionStyle = .none
+        self.contentView.addSubview(galleryCollectionView)
         self.contentView.addSubview(moreTextButton)
         moreTextButton.addTarget(self, action: #selector(moreTextButtonTouch), for: .touchUpInside)
     }
@@ -105,15 +110,17 @@ class NewsfeedTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
-    @IBOutlet weak var widthCommentsLabel: NSLayoutConstraint!
     
     func set(viewModel: FeedCellViewModel) {
         imageCellView.set(imageUrl: viewModel.iconUrlString)
-        
+        print(viewModel)
+        setLayoutOnBottomBlock(str: viewModel.likes, label: countLikesLabel, constr: trailingLikeImageConstraintToLabel)
+        setLayoutOnBottomBlock(str: viewModel.comments, label: countCommentsLabel, constr: trailingCommentImageConstraintToLabel)
+        setLayoutOnBottomBlock(str: viewModel.shares, label: countSharesLabel, constr: trilingShareImageConstraintToLabel)
         nameLabel.text = viewModel.name
         postLabel.text = viewModel.text
         dateLabel.text = viewModel.date
@@ -122,22 +129,33 @@ class NewsfeedTableViewCell: UITableViewCell {
         countCommentsLabel.text = viewModel.comments
         countViewLabel.text = viewModel.views
         postLabel.frame = viewModel.sizes.postLabelFrame
-        postImageCellView.frame = viewModel.sizes.attachmentFrame
         bottomView.frame = viewModel.sizes.bottomView
         moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
-//        if let photoAttachment = viewModel.photoAttachment?.photoUrlString {
-//            postImageCellView.set(imageUrl: photoAttachment)
-//            postImageCellView.isHidden = false
-//        } else {
-//            postImageCellView.isHidden = true
-//        }
-        
         if let photoAttachment = viewModel.photoAttachments.first, viewModel.photoAttachments.count == 1 {
             postImageCellView.set(imageUrl: photoAttachment.photoUrlString)
             postImageCellView.isHidden = false
+            galleryCollectionView.isHidden = true
+            postImageCellView.frame = viewModel.sizes.attachmentFrame
+        } else if viewModel.photoAttachments.count > 1 {
+            galleryCollectionView.frame = viewModel.sizes.attachmentFrame
+            postImageCellView.isHidden = true
+            galleryCollectionView.isHidden = false
+            galleryCollectionView.set(photos: viewModel.photoAttachments)
         } else {
             postImageCellView.isHidden = true
+            galleryCollectionView.isHidden = true
         }
         
+    }
+    
+    private func setLayoutOnBottomBlock(str: String?, label: UILabel, constr: NSLayoutConstraint) {
+        if str == "0" {
+            label.isHidden = true
+            label.text = ""
+            constr.constant = -7
+        } else {
+            constr.constant = 2
+            label.isHidden = false
+        }
     }
 }
